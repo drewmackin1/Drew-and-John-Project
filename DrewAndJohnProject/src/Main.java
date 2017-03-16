@@ -21,6 +21,34 @@ public class Main extends JPanel {
             balls.add(balli);
         }
 
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+                int x = mouseEvent.getX();
+                int y = mouseEvent.getY();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
+
         timer = new Timer(40, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -40,10 +68,10 @@ public class Main extends JPanel {
 
         }
     }
-    public boolean intersect(){
+    public boolean intersect(int x, int y){
         for(Ball b: balls) {
-            if(b.getX() && b.getY() == /* mouselistener plus or minus the diameters*/){
-             return true   ;
+            if(b.getX() == x && b.getY() == y){
+             return true;
             }
         return false;
         }
