@@ -5,13 +5,21 @@ import java.util.ArrayList;
 
 public class Main extends JPanel {
 
-    public static final int FRAMEWIDTH = 1440, FRAMEHEIGHT = 900;
+    public static final int FRAMEWIDTH = 900, FRAMEHEIGHT = 900;
+    private int level = 3;
     private Timer timer;
     private ArrayList<Ball> balls;
 
     public Main() {
-        Ball ball1 = new Ball(100,100, 20, 20);
-        balls.add(ball1);
+        balls = new ArrayList<Ball>();
+        for (int i = 0; i < level*10; i++) {
+           if(Math.random() > .5){
+               Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*-3)+1,(int)(Math.random()*-3)+1);
+               balls.add(balli);
+           }
+            Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*3)+1,(int)(Math.random()*3)+1);
+            balls.add(balli);
+        }
 
         timer = new Timer(40, new ActionListener() {
             @Override
@@ -28,6 +36,16 @@ public class Main extends JPanel {
 
         for(Ball b: balls) {
             b.draw(g2);
+            b.move(FRAMEWIDTH,FRAMEHEIGHT-22);
+
+        }
+    }
+    public boolean intersect(){
+        for(Ball b: balls) {
+            if(b.getX() && b.getY() == /* mouselistener plus or minus the diameters*/){
+             return true   ;
+            }
+        return false;
         }
     }
 
