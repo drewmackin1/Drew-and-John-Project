@@ -69,12 +69,13 @@ public class Main extends JPanel {
         }
     }
     public boolean intersect(int x, int y){
+       boolean f = false;
         for(Ball b: balls) {
-            if(b.getX() == x && b.getY() == y){
-             return true;
+            if(b.getX()-5 > x-25 && b.getX()-5 < x+25 && b.getY()-5 > y-25 && b.getY() < y+25){
+             f = true;
             }
-        return false;
         }
+        return f;
     }
 
     public static void main(String[] args) {
