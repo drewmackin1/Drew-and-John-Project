@@ -36,6 +36,8 @@ public class Main extends JPanel {
             public void mouseReleased(MouseEvent mouseEvent) {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
+                intersect(x, y);
+                repaint();
             }
 
             @Override
@@ -73,10 +75,18 @@ public class Main extends JPanel {
         for(Ball b: balls) {
             if(b.getX()-5 > x-25 && b.getX()-5 < x+25 && b.getY()-5 > y-25 && b.getY() < y+25){
              f = true;
+                System.out.println("INTERSECT");
             }
         }
         return f;
     }
+
+// TODO
+// public void react(){
+//        for(Ball b: balls){
+//            if (b.intersect())
+//        }
+//    }
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Project");
