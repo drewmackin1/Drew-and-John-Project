@@ -14,7 +14,7 @@ public class Main extends JPanel {
         balls = new ArrayList<Ball>();
         for (int i = 0; i < level*10; i++) {
            if(Math.random() > .5){
-               Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*-3)+1,(int)(Math.random()*-3)+1);
+               Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*-3)-1,(int)(Math.random()*-3)-1);
                balls.add(balli);
            }
             Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*3)+1,(int)(Math.random()*3)+1);
@@ -36,8 +36,22 @@ public class Main extends JPanel {
             public void mouseReleased(MouseEvent mouseEvent) {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
-                intersect(x, y);
+                Ball starter = new Ball(x-25, y-25,0,0);
+                starter.setDiameter(50);
+                balls.add(starter);
+                for(Ball b: balls){
+                    if(b.intersect(x, y)){
+                        b.setVY(0);
+                        b.setVX(0);
+
+                        while (b.getDiameter() < 50){
+                            b.setDiameter(b.getDiameter()+1);
+                        }
+                    }
+                }
+
                 repaint();
+
             }
 
             @Override
@@ -70,23 +84,8 @@ public class Main extends JPanel {
 
         }
     }
-    public boolean intersect(int x, int y){
-       boolean f = false;
-        for(Ball b: balls) {
-            if(b.getX()-5 > x-25 && b.getX()-5 < x+25 && b.getY()-5 > y-25 && b.getY() < y+25){
-             f = true;
-                System.out.println("INTERSECT");
-            }
-        }
-        return f;
-    }
 
-// TODO
-// public void react(){
-//        for(Ball b: balls){
-//            if (b.intersect())
-//        }
-//    }
+
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Project");
@@ -100,4 +99,5 @@ public class Main extends JPanel {
         window.setVisible(true);
         window.setResizable(false);
     }
+
 }

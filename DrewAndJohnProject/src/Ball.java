@@ -41,6 +41,15 @@ public class Ball {
         x += vx;
         y += vy;
     }
+    public boolean intersect(int mx, int my){
+        boolean f = false;
+
+            if(this.getX()-5 > mx-25 && this.getX()-5 < mx+25 && this.getY()-5 > my-25 && this.getY() < my+25){
+                f = true;
+
+            }
+        return f;
+    }
 
     public void randomColor(){
         int r = (int)(Math.random()*256);
@@ -61,6 +70,11 @@ public class Ball {
 
     public int getDiameter() {
         return diameter;
+    }
+
+    public Ball setDiameter(int diameter) {
+        this.diameter = diameter;
+        return this;
     }
 
     public void setVX(int newVX){
