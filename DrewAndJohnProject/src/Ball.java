@@ -44,9 +44,8 @@ public class Ball {
     public boolean intersect(int mx, int my){
         boolean f = false;
 
-            if(this.getX()-5 > mx-25 && this.getX()-5 < mx+25 && this.getY()-5 > my-25 && this.getY() < my+25){
+            if(50>Math.sqrt(Math.pow((this.y+25)-(my+25),2)+Math.pow((this.x+25)-(mx+25),2))){
                 f = true;
-
             }
         return f;
     }
