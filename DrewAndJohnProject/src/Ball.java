@@ -41,13 +41,18 @@ public class Ball {
         x += vx;
         y += vy;
     }
-    public boolean intersect(int mx, int my){
-        boolean f = false;
 
-            if(50>Math.sqrt(Math.pow((this.y+25)-(my+25),2)+Math.pow((this.x+25)-(mx+25),2))){
-                f = true;
-            }
-        return f;
+    public double distance(Point a, Point b){
+        return a.distance(b);
+    }
+    public Point getCenterPoint(){
+        return new Point(x+diameter/2, y+diameter/2);
+    }
+    public boolean intersect(Ball ball){
+       if(distance(getCenterPoint(), ball.getCenterPoint()) < diameter/2 + ball.getDiameter()/2){
+           return true;
+       }
+        return false;
     }
 
     public void randomColor(){

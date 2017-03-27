@@ -67,7 +67,7 @@ public class Main extends JPanel {
                     Triggerball t = trigger.get(j);
                     for (int i = 0; i < balls.size(); i++) {
                         Ball b = balls.get(i);
-                        if (b.intersect(t.getX(), t.getY())) {
+                        if (b.intersect(t)) {
                             trigger.add(new Triggerball(b.getX(), b.getY(), 0, 0, 50));
                             balls.remove(i);
                             i--;
@@ -81,10 +81,10 @@ public class Main extends JPanel {
                         }
                     }
                 }
-                for (int i = 0; i < trigger.size(); i++) {
-                    if ()
-
-                }
+//                for (int i = 0; i < trigger.size(); i++) {
+//                    if ()
+//
+//                }
 
                 for(Ball b: balls) {
                     b.move(FRAMEWIDTH,FRAMEHEIGHT-22);
