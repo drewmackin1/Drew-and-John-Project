@@ -15,12 +15,12 @@ public class Main extends JPanel {
         balls = new ArrayList<Ball>();
         trigger = new ArrayList<Triggerball>();
 
-        for (int i = 0; i < level*10; i++) {
-           if(Math.random() > .5){
-               Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*-3)-1,(int)(Math.random()*-3)-1);
-               balls.add(balli);
-           }
-            Ball balli = new Ball((int)(Math.random()*878),(int)(Math.random()*900),(int)(Math.random()*3)+1,(int)(Math.random()*3)+1);
+        for (int i = 0; i < level * 10; i++) {
+            if (Math.random() > .5) {
+                Ball balli = new Ball((int) (Math.random() * 878), (int) (Math.random() * 900), (int) (Math.random() * -3) - 1, (int) (Math.random() * -3) - 1);
+                balls.add(balli);
+            }
+            Ball balli = new Ball((int) (Math.random() * 878), (int) (Math.random() * 900), (int) (Math.random() * 3) + 1, (int) (Math.random() * 3) + 1);
             balls.add(balli);
         }
 
@@ -39,14 +39,14 @@ public class Main extends JPanel {
             public void mouseReleased(MouseEvent mouseEvent) {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
-               Triggerball starter = new Triggerball(x-25,y-25,0,0,50);
+                Triggerball starter = new Triggerball(x - 25, y - 25, 0, 0, 50);
 //                Ball starter = new Ball(x-25, y-25,0,0);
 //                starter.setDiameter(50);
                 trigger.add(starter);
 // balls.add(starter);
 
                 repaint();
-                }
+            }
 
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
@@ -67,42 +67,37 @@ public class Main extends JPanel {
                     Triggerball t = trigger.get(j);
                     for (int i = 0; i < balls.size(); i++) {
                         Ball b = balls.get(i);
-                        if (b.intersect(t.getX(), t.getY())) {
-                            trigger.add(new Triggerball(b.getX(), b.getY(), 0, 0, 50));
+                        if (b.intersect(t) ){
+
                             balls.remove(i);
-                            i--;
-                            System.out.println("work");
+                            trigger.add(new Triggerball(b.getX(), b.getY(), 0, 0, 50));
 
-//                        b.setVY(0);
-//                        b.setVX(0);
-
-//                        while (b.getDiameter() < 50){
-//                            b.setDiameter(b.getDiameter()+1);
                         }
+
                     }
                 }
-                for (int i = 0; i < trigger.size(); i++) {
-                    if ()
+//                for (int i = 0; i < trigger.size(); i++) {
+//                    if ()
+//                }
 
+                for (Ball b : balls) {
+                    b.move(FRAMEWIDTH, FRAMEHEIGHT - 22);
                 }
 
-                for(Ball b: balls) {
-                    b.move(FRAMEWIDTH,FRAMEHEIGHT-22);
-                }
                 repaint();
             }
         });
         timer.start();
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
-        for (Triggerball t: trigger){
+        for (Triggerball t : trigger) {
             t.draw(g2);
         }
-        for(Ball b: balls) {
+        for (Ball b : balls) {
             b.draw(g2);
         }
     }
