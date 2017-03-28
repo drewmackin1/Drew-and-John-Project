@@ -39,7 +39,7 @@ public class Main extends JPanel {
             public void mouseReleased(MouseEvent mouseEvent) {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
-               Triggerball starter = new Triggerball(x-25,y-25,0,0,50);
+               Triggerball starter = new Triggerball(x-25,y-25,0,0,50,(int)System.currentTimeMillis());
 //                Ball starter = new Ball(x-25, y-25,0,0);
 //                starter.setDiameter(50);
                 trigger.add(starter);
@@ -65,13 +65,17 @@ public class Main extends JPanel {
                 for (int j = 0; j < trigger.size(); j++) {
 
                     Triggerball t = trigger.get(j);
+                    if (t.getDead()){
+                        trigger.remove(j);
+                    }
                     for (int i = 0; i < balls.size(); i++) {
                         Ball b = balls.get(i);
-                        if (b.intersect(t.getX(), t.getY())) {
-                            trigger.add(new Triggerball(b.getX(), b.getY(), 0, 0, 50));
+                        if (b.intersect(t)){
+                            trigger.add(new Triggerball(b.getX(), b.getY(), 0, 0, 50,System.currentTimeMillis()));
                             balls.remove(i);
                             i--;
                             System.out.println("work");
+
 
 //                        b.setVY(0);
 //                        b.setVX(0);
@@ -81,10 +85,10 @@ public class Main extends JPanel {
                         }
                     }
                 }
-                for (int i = 0; i < trigger.size(); i++) {
-                    if ()
-
-                }
+//                for (int i = 0; i < trigger.size(); i++) {
+//                    if ()
+//
+//                }
 
                 for(Ball b: balls) {
                     b.move(FRAMEWIDTH,FRAMEHEIGHT-22);
@@ -119,4 +123,5 @@ public class Main extends JPanel {
         window.setVisible(true);
         window.setResizable(false);
     }
+
 }
