@@ -11,7 +11,7 @@ public class Ball {
         this.vx = vx;
         this.vy = vy;
 
-        diameter = 10;
+        diameter = 20;
         randomColor();
     }
 

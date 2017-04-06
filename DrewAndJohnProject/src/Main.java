@@ -10,10 +10,12 @@ public class Main extends JPanel {
     private Timer timer;
     private ArrayList<Ball> balls;
     private ArrayList<Triggerball> trigger;
+    private int n;
 
     public Main() {
         balls = new ArrayList<Ball>();
         trigger = new ArrayList<Triggerball>();
+        n = 0;
 
         for (int i = 0; i < level*20; i++) {
            if(Math.random() > .5){
@@ -37,8 +39,11 @@ public class Main extends JPanel {
             public void mouseReleased(MouseEvent mouseEvent) {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
-               Triggerball starter = new Triggerball(x-25,y-25,0,0,50,(int)System.currentTimeMillis());
-                trigger.add(starter);
+                if(n ==0) {
+                    Triggerball starter = new Triggerball(x - 50, y - 50, 20, System.currentTimeMillis());
+                    trigger.add(starter);
+                    n++;
+                }
                 repaint();
                 }
 
@@ -62,12 +67,12 @@ public class Main extends JPanel {
                     for (int i = 0; i < balls.size(); i++) {
                         Ball b = balls.get(i);
                         if (b.intersect(t)){
-                            trigger.add(new Triggerball((int)(b.getCenterPoint().getX())-t.getDiameter()/2,(int)(b.getCenterPoint().getY())-t.getDiameter()/2, 0, 0, 50,System.currentTimeMillis()));
+                            trigger.add(new Triggerball((int)(b.getCenterPoint().getX())-50,(int)(b.getCenterPoint().getY())-50, 20,System.currentTimeMillis()));
                             balls.remove(i);
                             i--;
                             if(balls.size() < level*10){
-                                restart();
                                 level++;
+                                restart();
                             }
                         }
                     }
@@ -75,6 +80,9 @@ public class Main extends JPanel {
 
                 for(Ball b: balls) {
                     b.move(FRAMEWIDTH,FRAMEHEIGHT-22);
+                }
+                for (Triggerball t : trigger){
+                    t.grow();
                 }
                 repaint();
             }
@@ -88,6 +96,7 @@ public class Main extends JPanel {
 
         for (Triggerball t: trigger){
             t.draw(g2);
+
         }
         for(Ball b: balls) {
             b.draw(g2);
