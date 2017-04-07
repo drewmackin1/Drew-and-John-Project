@@ -15,18 +15,18 @@ public class Triggerball extends Ball{
 
     }
     public boolean getDead(){
-        if(System.currentTimeMillis() - birthTime > 10000/main.getLevel()+2){
+        if(System.currentTimeMillis() - birthTime > 10000/main.getLevel()+23){
             /*
-            1 = 12 (10/x)+2
-            2 = 7
-            3 = 5
-            4 = 4
-            5 = 4
-            6 = 3
-            7 = 3
-            8 = 3
-            9 = 3
-            10 = 3
+            1 = 13 (10/x)+2
+            2 = 8
+            3 = 6
+            4 = 5
+            5 = 5
+            6 = 4
+            7 = 4
+            8 = 4
+            9 = 4
+            10 = 4
              */
             return true;
         }
