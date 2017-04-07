@@ -10,12 +10,15 @@ public class Main extends JPanel {
     private ArrayList<Ball> balls;
     private ArrayList<Triggerball> trigger;
     private int level, n;
+    private Main thisMain;
 
     public Main() {
         balls = new ArrayList<Ball>();
         trigger = new ArrayList<Triggerball>();
         n = 0;
         level = 1;
+
+        thisMain = this;
 
         for (int i = 0; i < level*20; i++) {
             if (Math.random() > .5) {
@@ -41,7 +44,7 @@ public class Main extends JPanel {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
                 if(n ==0) {
-                    Triggerball starter = new Triggerball(x, y, 20, System.currentTimeMillis(), Color.blue);
+                    Triggerball starter = new Triggerball(x, y, 20, System.currentTimeMillis(), Color.blue, thisMain);
                     trigger.add(starter);
                     n++;
                 }
@@ -68,7 +71,7 @@ public class Main extends JPanel {
                         for (int i = 0; i < balls.size(); i++) {
                             Ball b = balls.get(i);
                             if (b.intersect(t)) {
-                                trigger.add(new Triggerball(b.getX(), b.getY(), 20, System.currentTimeMillis(), b.getColor()));
+                                trigger.add(new Triggerball(b.getX(), b.getY(), 20, System.currentTimeMillis(), b.getColor(), thisMain));
                                 balls.remove(i);
                                 i--;
                             }
@@ -127,6 +130,7 @@ g2.setColor(Color.black);
     }
     public void restart(){
        n = 0;
+        System.out.println(level);
         for (int j = 0; j < trigger.size(); j++) {
                 trigger.remove(j);
             j--;
