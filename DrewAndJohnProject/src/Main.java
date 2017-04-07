@@ -41,7 +41,7 @@ public class Main extends JPanel {
                 int x = mouseEvent.getX();
                 int y = mouseEvent.getY();
                 if(n ==0) {
-                    Triggerball starter = new Triggerball(x, y, 20, System.currentTimeMillis());
+                    Triggerball starter = new Triggerball(x, y, 20, System.currentTimeMillis(), Color.blue);
                     trigger.add(starter);
                     n++;
                 }
@@ -68,7 +68,7 @@ public class Main extends JPanel {
                         for (int i = 0; i < balls.size(); i++) {
                             Ball b = balls.get(i);
                             if (b.intersect(t)) {
-                                trigger.add(new Triggerball(b.getX(), b.getY(), 20, System.currentTimeMillis()));
+                                trigger.add(new Triggerball(b.getX(), b.getY(), 20, System.currentTimeMillis(), b.getColor()));
                                 balls.remove(i);
                                 i--;
                             }
@@ -91,16 +91,25 @@ public class Main extends JPanel {
         timer.start();
     }
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
+g2.setColor(Color.black);
+        g2.fillRect(0,0,1000,1000);
 
-        for (Triggerball t: trigger){
+        for (Triggerball t : trigger) {
             t.draw(g2);
 
         }
-        for(Ball b: balls) {
+        for (Ball b : balls) {
             b.draw(g2);
+        }
+
+        Font f = new Font("Comic Sans MS", Font.BOLD, 20);
+        g2.setFont(f);
+        int l = level - 1;
+        if (level > 1) {
+            g2.drawString("You passed level " + l + "!", 50, 50);
         }
     }
 
@@ -126,7 +135,6 @@ public class Main extends JPanel {
                 balls.remove(i);
             i--;
             }
-
 
         for (int i = 0; i < level * 20; i++) {
             if (Math.random() > .5) {

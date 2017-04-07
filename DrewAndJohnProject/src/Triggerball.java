@@ -5,10 +5,12 @@ public class Triggerball extends Ball{
     Main main = new Main();
 
     private long birthTime;
-    public Triggerball(int x, int y, int diameter, long birthTime){
+    private Color color;
+    public Triggerball(int x, int y, int diameter, long birthTime, Color color){
         super(x,y,0,0);
         setDiameter(diameter);
         this.birthTime = birthTime;
+        this.color = color;
 
     }
     public boolean getDead(){

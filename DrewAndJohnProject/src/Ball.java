@@ -104,4 +104,8 @@ public class Ball {
     public int getVy() {
         return vy;
     }
+
+    public Color getColor(){
+        return color;
+    }
 }
